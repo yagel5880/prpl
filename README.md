@@ -35,7 +35,7 @@ http://yagelnew.2.idus.co.il/prpl/api/user/read_single.php?id=1234&tag=traded
 to show user bided items get id and tag name "bided"
 http://yagelnew.2.idus.co.il/prpl/api/user/read_single.php?id=4321&tag=bided
 
-
-
+POSTMEN LINK
+https://app.getpostman.com/join-team?invite_code=6ad803d76bdfc1cdf583739194037825&target_code=f262f0731f15231255768942a48ab99f
 
 
