@@ -1,6 +1,6 @@
 # prpl
 
-to creat a user you need to post id and name and image
+to creat a user you need to post id and name and image<br>
 http://yagelnew.2.idus.co.il/prpl/api/user/create.php
 
 
