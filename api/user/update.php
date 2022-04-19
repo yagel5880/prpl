@@ -18,10 +18,13 @@
     
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
-   
-    $fileName  =  $_FILES['image']['name'];
-    $tempPath  =  $_FILES['image']['tmp_name'];
-    $fileSize  =  $_FILES['image']['size'];
+    
+    if($_FILES) {
+        
+        $fileName  =  $_FILES['image']['name'];
+        $tempPath  =  $_FILES['image']['tmp_name'];
+        $fileSize  =  $_FILES['image']['size'];
+    } 
 
     if(!$_POST['id']) {
 

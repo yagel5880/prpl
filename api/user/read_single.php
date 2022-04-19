@@ -1,5 +1,5 @@
 <?php 
-    // http://localhost/prpl/api/user/read_single.php?id=040373995
+    // http://localhost/prpl/api/user/read_single.php?id=1234
 
     // Headers
     header('Access-Control-Allow-Origin: *');
@@ -24,7 +24,7 @@
   
     // Get ID
     $user->id = isset($_GET['id']) ? $_GET['id'] : die();
-    
+    $status = isset($_GET['tag']) ? $_GET['tag'] : 'my';
     // User read query
     $result = $user->read_single();
  
@@ -37,14 +37,16 @@
         while($row = $result->fetch_object()) {            
             $userArr[$row->id] = (array)$row;
 
-            $resultItems = $items->getUserItemsList($row->id);
-           
+            $resultItems = $items->getUserItemsList($row->id,$status);
+ 
             if($resultItems->num_rows > 0) { 
                 $count = 0;
                 while($itemRow = $resultItems->fetch_object()) { 
- 
-                    $userArr[$row->id]['items'][$count]['value'] =  $itemsList[$itemRow->item_id]['value'];
-                    $userArr[$row->id]['items'][$count]['name'] =  $itemsList[$itemRow->item_id]['name'];
+
+                    $userArr[$row->id][$status][$count]['value'] =  $itemsList[$itemRow->item_id]['value'];
+                    $userArr[$row->id][$status][$count]['name'] =  $itemsList[$itemRow->item_id]['name'];
+                     
+                   
                     $count++;
                 }
             }

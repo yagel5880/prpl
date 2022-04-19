@@ -47,14 +47,14 @@
             $set = array();
             $query = '';
 
-            if($this->id) {
+            if($this->id && $this->read_single()->num_rows > 0) {
                 if (isset($this->name)) $set[] = '`name` = "'.$this->name.'"';
                 if (isset($this->image)) $set[] = '`image` = "'.$this->image.'"';
                 $query = rtrim(implode(',',$set),',');
                  
                 $qr = $this->sql->query('UPDATE ' . $this->table . ' SET '.$query.' WHERE `id`="'.$this->id.'"');
-                
-                if ($qr) return true;
+               
+                if($qr) return true;
             }
 
             return false;

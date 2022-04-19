@@ -31,24 +31,61 @@
         }
         
         // Get User Items
-        public function getUserItemsList($user=null,$status="my" ){
+        public function getUserItemsList($user=null,$status="my"){
             if($user==null) return false;
-            
-            $qr = $this->sql->query('SELECT * FROM '. $this->table .' WHERE `user_id` = "'.$user.'" AND `status`="'.$status.'"' );
-            
+            if(empty($status)) $status="my";
+  
+            switch ($status) {
+                
+                case 'bided':
+                   
+                    $qr = $this->sql->query('
+                        SELECT * FROM `trade`
+                        INNER JOIN `items` ON `trade`.item_id = `items`.`id`
+                        WHERE `trade`.`user_id` = "'.$user.'" 
+                        AND `trade`.`tag`="'.$status.'"
+                    ');
+
+                    break;
+
+                case 'traded':
+                 
+                    $qr = $this->sql->query('
+                        SELECT * FROM `trade`
+                        INNER JOIN `items` ON `trade`.item_id = `items`.`id`
+                        WHERE `trade`.`temp_user_id` = "'.$user.'" 
+                        AND `trade`.`tag`="'.$status.'"
+                    ');
+
+                    break;    
+                
+                default:
+                 
+                    $qr = $this->sql->query('
+                        SELECT * FROM `items`
+                        WHERE `user_id` = "'.$user.'" 
+                        AND `status`="'.$status.'"
+                    ');
+
+                    break;
+            }  
+
             return $qr; 
         }
     
         // Set User Items
-        public function setUserItemsList($user=null, $item=null){
+        public function setUserItemsList($user=null, $item=null, $status='my' ){
             
             if($user==null || $item==null) return false;
+        
+            $this->sql->query('
+                INSERT INTO `items` SET 
+                `user_id` = "'. $user .'",
+                `item_id` = "'. $item . '",
+                `status` = "'. $status .'"
+            ');
             
-            $qr = $this->sql->query('INSERT INTO '. $this->table .' SET `user_id` = "'.$user.'", `item_id`="'.$item.'", status = "my"' );
-            
-            if($qr) return true;
-            
-            return false;
+            return true;
         }
 
         
