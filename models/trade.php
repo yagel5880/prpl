@@ -24,11 +24,11 @@
             if(empty($this->items) || empty($this->myItems)) return false;
             
             $items = array();
-
+           
             foreach ($this->items as $item) {
 
                 foreach ($this->myItems as $k=>$myItem) {
-                    if ($item == $myItem){
+                    if ($item == $myItem && empty($items[$k])){
                         $items[$k] = $item;
                         break;
                     }
@@ -132,9 +132,10 @@
 
                             while ($row = $qr->fetch_object()) {
                         
-                                $tradeItems[] = $row->id;   
+                                $tradeItems[] = $row->item_id;   
                             }
                         }
+
 
                         // Update my items
                         $this->sql->query('

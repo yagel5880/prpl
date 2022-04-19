@@ -4,9 +4,9 @@
       
       // DB Params
       private $host = 'localhost';
-      private $db = 'prpl';
-      private $user = 'root';
-      private $pass = '';
+      private $db = 'yagelnew_web';
+      private $user = 'yagelnew_prpl';
+      private $pass = 'bETJHuDk4w';
       private $conn;
 
       // DB Connect

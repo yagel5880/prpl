@@ -1,4 +1,5 @@
 <?php 
+
     // http://localhost/prpl/api/trade/bid.php
     // http://localhost/prpl/api/trade/bid.php?tag=trade
 
@@ -31,7 +32,8 @@
         );
         exit;
     }
-    
+
+
     // DB & connect
     $db = new Database();
     
@@ -57,19 +59,23 @@
     foreach ($data as $k=>$v) {
         $trade->$k = $v;
     }
-    $tags = ['bid', 'trade'];
+
+    $tags = array('bid', 'trade');
     $tag = 'bid';
     $temp_user_id = '';
 
 
-    if(isset($_GET['tag']) && in_array($_GET['tag'],$tags)) {
-        $tag = $_GET['tag'];
-    }else{
+    if(isset($_GET['tag']) ) {
+        
+        if(in_array($_GET['tag'],$tags)) {
+            $tag = $_GET['tag'];
+        }else{
 
-        echo json_encode(
-            array('message' => 'Tag Is not Valid')
-        );
-        exit;        
+            echo json_encode(
+                array('message' => 'Tag Is not Valid')
+            );
+            exit;        
+        }
     }
 
     if(isset($_POST['temp_user'])) $temp_user_id = $_POST['temp_user'];

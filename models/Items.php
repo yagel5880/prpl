@@ -42,7 +42,7 @@
                     $qr = $this->sql->query('
                         SELECT * FROM `trade`
                         INNER JOIN `items` ON `trade`.item_id = `items`.`id`
-                        WHERE `trade`.`user_id` = "'.$user.'" 
+                        WHERE (`trade`.`user_id` = "'.$user.'" OR  `trade`.`temp_user_id` = "'.$user.'")
                         AND `trade`.`tag`="'.$status.'"
                     ');
 
@@ -53,7 +53,7 @@
                     $qr = $this->sql->query('
                         SELECT * FROM `trade`
                         INNER JOIN `items` ON `trade`.item_id = `items`.`id`
-                        WHERE `trade`.`temp_user_id` = "'.$user.'" 
+                        WHERE (`trade`.`user_id` = "'.$user.'" OR  `trade`.`temp_user_id` = "'.$user.'")
                         AND `trade`.`tag`="'.$status.'"
                     ');
 
